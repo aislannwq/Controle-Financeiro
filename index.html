@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Control</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Finance Control</h1>
+    <p>Seu dinheiro sob controle.</p>
+  </header>
+
+  <main>
+    <section class="resumo">
+      <div class="card">
+        <h2>Saldo atual</h2>
+        <p id="saldo">R$ 0,00</p>
+      </div>
+
+      <div class="card">
+        <h2>Receitas</h2>
+        <p id="receitas">R$ 0,00</p>
+      </div>
+
+      <div class="card">
+        <h2>Despesas</h2>
+        <p id="despesas">R$ 0,00</p>
+      </div>
+    </section>
+
+    <section class="transacoes">
+      <h2>Nova movimentação</h2>
+
+      <form id="form-transacao">
+        <input
+          type="text"
+          id="descricao"
+          placeholder="Ex.: Salário ou Internet"
+          required
+        >
+
+        <input
+          type="number"
+          id="valor"
+          placeholder="Valor em R$"
+          min="0.01"
+          step="0.01"
+          required
+        >
+
+        <select id="tipo">
+          <option value="receita">Receita</option>
+          <option value="despesa">Despesa</option>
+        </select>
+
+        <button type="submit">Adicionar</button>
+      </form>
+
+      <h2>Histórico</h2>
+      <ul id="lista-transacoes"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
