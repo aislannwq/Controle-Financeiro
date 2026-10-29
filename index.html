@@ -1,69 +1,350 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Finance Control: organize suas receitas, despesas e acompanhe sua vida financeira."
+  >
+
+  <meta name="theme-color" content="#101310">
+
   <title>Finance Control</title>
+
   <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js" defer></script>
 </head>
+
 <body>
-  <header>
-    <h1>te amo meu  amor</h1>
-    <p>lyze linda</p>
+
+  <!-- MENU SUPERIOR -->
+
+  <header class="topbar">
+
+    <div class="topbar-conteudo">
+
+      <a href="#inicio" class="logo">
+        <span class="logo-simbolo">F</span>
+
+        <span class="logo-texto">
+          Finance<span>Control</span>
+        </span>
+      </a>
+
+      <nav class="menu-principal" aria-label="Navegação principal">
+        <a href="#inicio" class="ativo">Visão geral</a>
+        <a href="#resumo-mensal">Resumo mensal</a>
+        <a href="#analise-despesas">Análises</a>
+        <a href="#nova-movimentacao">Movimentações</a>
+        <a href="#historico">Histórico</a>
+      </nav>
+
+      <div class="status-sistema">
+        <span class="status-ponto"></span>
+        Sistema ativo
+      </div>
+
+    </div>
+
   </header>
 
-  <main>
-    <section class="resumo">
-      <div class="card">
-        <h2>Saldo atual</h2>
-        <p id="saldo">R$ 0,00</p>
+  <main id="inicio">
+
+    <!-- APRESENTAÇÃO -->
+
+    <section class="boas-vindas">
+
+      <div>
+        <span class="etiqueta-secao">PAINEL FINANCEIRO</span>
+
+        <h1>Visão geral</h1>
+
+        <p>
+          Acompanhe suas finanças e mantenha o controle do seu dinheiro.
+        </p>
       </div>
 
-      <div class="card">
-        <h2>Receitas</h2>
-        <p id="receitas">R$ 0,00</p>
+      <div class="data-atual">
+        <span>SEU CONTROLE FINANCEIRO</span>
+        <strong>Finance Control</strong>
       </div>
 
-      <div class="card">
-        <h2>Despesas</h2>
-        <p id="despesas">R$ 0,00</p>
-      </div>
     </section>
 
-    <section class="transacoes">
-      <h2>Nova movimentação</h2>
+    <!-- RESUMO GERAL -->
+
+    <section class="resumo" aria-label="Resumo financeiro geral">
+
+      <article class="card card-saldo">
+        <div class="card-cabecalho">
+          <h2>Saldo geral</h2>
+          <span class="card-icone">R$</span>
+        </div>
+
+        <p id="saldo">R$ 0,00</p>
+        <span class="card-descricao">Resultado acumulado</span>
+      </article>
+
+      <article class="card">
+        <div class="card-cabecalho">
+          <h2>Receitas totais</h2>
+          <span class="card-icone icone-verde">↗</span>
+        </div>
+
+        <p id="receitas">R$ 0,00</p>
+        <span class="card-descricao">Total de entradas</span>
+      </article>
+
+      <article class="card">
+        <div class="card-cabecalho">
+          <h2>Despesas totais</h2>
+          <span class="card-icone icone-vermelho">↘</span>
+        </div>
+
+        <p id="despesas">R$ 0,00</p>
+        <span class="card-descricao">Total de saídas</span>
+      </article>
+
+    </section>
+
+    <!-- RESUMO MENSAL -->
+
+    <section
+      class="resumo-mensal painel"
+      id="resumo-mensal"
+    >
+
+      <div class="secao-cabecalho">
+
+        <div>
+          <span class="etiqueta-secao">ACOMPANHAMENTO</span>
+          <h2>Resumo mensal</h2>
+          <p>Visualize o desempenho das suas finanças.</p>
+        </div>
+
+        <div class="filtro-mes">
+          <label for="mes-filtro">Período:</label>
+
+          <input
+            type="month"
+            id="mes-filtro"
+            aria-label="Filtrar movimentações por mês"
+          >
+        </div>
+
+      </div>
+
+      <div class="resumo">
+
+        <article class="card card-interno">
+          <h2>Receitas do mês</h2>
+          <p id="receitas-mes">R$ 0,00</p>
+        </article>
+
+        <article class="card card-interno">
+          <h2>Despesas do mês</h2>
+          <p id="despesas-mes">R$ 0,00</p>
+        </article>
+
+        <article class="card card-interno">
+          <h2>Saldo do mês</h2>
+          <p id="saldo-mes">R$ 0,00</p>
+        </article>
+
+      </div>
+
+      <div class="grafico-container">
+
+        <div class="titulo-grafico">
+          <div>
+            <h3>Receitas x despesas</h3>
+            <p>Comparativo financeiro do período selecionado.</p>
+          </div>
+        </div>
+
+        <div class="grafico">
+          <canvas
+            id="grafico-financeiro"
+            role="img"
+            aria-label="Gráfico de receitas e despesas do período selecionado"
+          ></canvas>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ANÁLISE DE DESPESAS -->
+
+    <section
+      class="analise-despesas painel"
+      id="analise-despesas"
+    >
+
+      <div class="secao-cabecalho">
+        <div>
+          <span class="etiqueta-secao">INTELIGÊNCIA FINANCEIRA</span>
+          <h2>Análise de despesas</h2>
+          <p>Descubra para onde seu dinheiro está indo.</p>
+        </div>
+      </div>
+
+      <div class="analise-conteudo">
+
+        <div class="grafico-container">
+
+          <div class="titulo-grafico">
+            <div>
+              <h3>Despesas por categoria</h3>
+              <p>Distribuição dos seus gastos.</p>
+            </div>
+          </div>
+
+          <div class="grafico grafico-categorias">
+            <canvas
+              id="grafico-categorias"
+              role="img"
+              aria-label="Gráfico de distribuição das despesas por categoria"
+            ></canvas>
+          </div>
+
+        </div>
+
+        <div class="ranking-categorias">
+
+          <div class="titulo-grafico">
+            <div>
+              <h3>Ranking de despesas</h3>
+              <p>Categorias com maiores gastos.</p>
+            </div>
+          </div>
+
+          <ul id="lista-categorias">
+            <li class="vazio">
+              Nenhuma despesa cadastrada neste período.
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- NOVA MOVIMENTAÇÃO -->
+
+    <section
+      class="nova-movimentacao painel"
+      id="nova-movimentacao"
+    >
+
+      <div class="secao-cabecalho">
+        <div>
+          <span class="etiqueta-secao">REGISTROS</span>
+          <h2>Nova movimentação</h2>
+          <p>Adicione uma receita ou despesa ao seu controle.</p>
+        </div>
+      </div>
 
       <form id="form-transacao">
+
         <input
           type="text"
           id="descricao"
-          placeholder="Ex.: Salário ou Internet"
+          placeholder="Descrição (ex.: salário)"
+          aria-label="Descrição da movimentação"
+          maxlength="100"
           required
         >
 
         <input
           type="number"
           id="valor"
-          placeholder="Valor em R$"
+          placeholder="Valor (R$)"
+          aria-label="Valor da movimentação"
           min="0.01"
           step="0.01"
           required
         >
 
-        <select id="tipo">
+        <input
+          type="date"
+          id="data"
+          aria-label="Data da movimentação"
+          required
+        >
+
+        <select
+          id="tipo"
+          aria-label="Tipo da movimentação"
+          required
+        >
           <option value="receita">Receita</option>
           <option value="despesa">Despesa</option>
         </select>
 
-        <button type="submit">Adicionar</button>
+        <select
+          id="categoria"
+          aria-label="Categoria da movimentação"
+          required
+        >
+          <option value="">Selecione uma categoria</option>
+        </select>
+
+        <button type="submit">+ Adicionar movimentação</button>
+
       </form>
 
-      <h2>Histórico</h2>
-      <ul id="lista-transacoes"></ul>
     </section>
+
+    <!-- HISTÓRICO -->
+
+    <section
+      class="transacoes painel"
+      id="historico"
+    >
+
+      <div class="secao-cabecalho">
+
+        <div>
+          <span class="etiqueta-secao">ACOMPANHAMENTO</span>
+          <h2>Histórico de movimentações</h2>
+
+          <p
+            id="titulo-historico"
+            class="subtitulo-historico"
+          >
+            Todas as movimentações
+          </p>
+        </div>
+
+      </div>
+
+      <ul id="lista-transacoes">
+
+        <li class="vazio">
+          Nenhuma movimentação cadastrada.
+        </li>
+
+      </ul>
+
+    </section>
+
+    <!-- RODAPÉ -->
+
+    <footer class="rodape">
+      <span>Finance Control</span>
+      <p>Organização financeira com simplicidade.</p>
+    </footer>
+
   </main>
 
-  <script src="script.js"></script>
 </body>
+
 </html>
